@@ -1,33 +1,33 @@
 "use strict";
-var fs = require("fs");
-var path = require("path");
+const fs = require("fs");
+const path = require("path");
 
-var htmls = 
+const htmls = 
 {
-	"<a href>":          '<a href="fake.html">link</a>',
-	"<area href/>":      '<area href="fake.html"/>',
-	"<audio src>":       '<audio src="fake.ogg"></audio>',
-	"<blockquote cite>": '<blockquote cite="fake.html">quote</blockquote>',
-	"<del cite>":        '<del cite="fake.html">deleted</del>',
-	"<embed src/>":      '<embed src="fake.swf"/>',
-	"<form action>":     '<form action="fake.html">fields</form>',
-	"<iframe longdesc>": '<iframe longdesc="fake.html"></iframe>',
-	"<iframe src>":      '<iframe src="fake.html"></iframe>',
-	"<img longdesc/>":   '<img longdesc="fake.html"/>',
-	"<img src/>":        '<img src="fake.png"/>',
-	"<input src/>":      '<input src="fake.png"/>',
-	"<ins cite>":        '<ins cite="fake.html">inserted</ins>',
-	"<link href/>":      '<link href="fake.css"/>',
-	"<menuitem icon/>":  '<menuitem icon="fake.png"/>',
+	"<a href>":          '<a href="file.html">link</a>',
+	"<area href/>":      '<area href="file.html"/>',
+	"<audio src>":       '<audio src="file.ogg"></audio>',
+	"<blockquote cite>": '<blockquote cite="file.html">quote</blockquote>',
+	"<del cite>":        '<del cite="file.html">deleted</del>',
+	"<embed src/>":      '<embed src="file.swf"/>',
+	"<form action>":     '<form action="file.html">fields</form>',
+	"<iframe longdesc>": '<iframe longdesc="file.html"></iframe>',
+	"<iframe src>":      '<iframe src="file.html"></iframe>',
+	"<img longdesc/>":   '<img longdesc="file.html"/>',
+	"<img src/>":        '<img src="file.png"/>',
+	"<input src/>":      '<input src="file.png"/>',
+	"<ins cite>":        '<ins cite="file.html">inserted</ins>',
+	"<link href/>":      '<link href="file.css"/>',
+	"<menuitem icon/>":  '<menuitem icon="file.png"/>',
 	
-	"<meta http-equiv=\"refresh\" content/>": '<meta http-equiv="refresh" content="5; url=fake.html"/>',
+	"<meta http-equiv=\"refresh\" content/>": '<meta http-equiv="refresh" content="5; url=file.html"/>',
 	
-	"<object data>":     '<object data="fake.swf"></object>',
-	"<q cite>":          '<q cite="fake.html">quote</q>',
-	"<script src>":      '<script src="fake.js"></script>',
-	"<source src/>":     '<source src="fake.ogg"/>',
-	"<track src/>":      '<track src="fake.vtt"/>',
-	"<video src>":       '<video src="fake.ogg"></video>'
+	"<object data>":     '<object data="file.swf"></object>',
+	"<q cite>":          '<q cite="file.html">quote</q>',
+	"<script src>":      '<script src="file.js"></script>',
+	"<source src/>":     '<source src="file.ogg"/>',
+	"<track src/>":      '<track src="file.vtt"/>',
+	"<video src>":       '<video src="file.ogg"></video>'
 };
 
 
@@ -41,12 +41,9 @@ function generate()
 
 function generateData()
 {
-	var base,htmlBase,url;
+	const output = {};
 	
-	var i;
-	var output = {};
-	
-	for (i in htmls)
+	for (let i in htmls)
 	{
 		output[i] = 
 		{
@@ -55,7 +52,19 @@ function generateData()
 			length: 1,
 			link:
 			{
-				url: { original:"" },
+				// Placeholder values for manual editing
+				url:
+				{
+					original: "",
+					resolved: { href:"http://domain.com/" },
+					rebased:  { href:"http://domain.com/" },
+					redirected: null
+				},
+				base:
+				{
+					resolved: { href:"http://domain.com/" },
+					rebased:  { href:"http://domain.com/" }
+				},
 				html:
 				{
 					selector: "",
